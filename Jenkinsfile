@@ -2,10 +2,8 @@ pipeline{
   agent any
   stages {
    stage('Gradle Build') {
-
        sh './gradlew build'
    }
-
     stage("Docker build"){
         sh 'docker version'
         sh 'docker build -t jhooq-docker-demo .'
@@ -20,7 +18,5 @@ pipeline{
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-
-
   }
 }
