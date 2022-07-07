@@ -22,7 +22,7 @@ node {
     }
     stage('Orchestrate')
     {
-    sh 'kubectl apply -f k8s-spring-boot-deployment.yaml'    
+        sh 'kubectl apply -f k8s-spring-boot-deployment.yaml'    
     }
 
 }
