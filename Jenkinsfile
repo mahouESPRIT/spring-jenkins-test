@@ -20,9 +20,21 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-    stage('Orchestrate')
-    {
-        sh "/usr/local/bin/kubectl apply -f k8s-spring-boot-deployment.yml"
+     stage("SSH Into k8s Server") {
+        def remote = [:]
+        remote.name = 'minikube'
+        remote.host = '192.168.59.100'
+        remote.user = 'docker'
+        remote.password = 'tcuser'
+        remote.allowAnyHosts = true
+
+        stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
+            sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
+        }
+
+        stage('Deploy spring boot') {
+          sshCommand remote: remote, command: "kubectl apply -f k8s-spring-boot-deployment.yml"
+        }
     }
 
 }
