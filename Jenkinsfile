@@ -13,7 +13,13 @@ node {
         sh 'docker image list'
         sh 'docker tag jhooq-docker-demo ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
+    withCredentials([string(credentialsId: 'docker-cred', variable: 'PASSWORD')]) {
+        sh 'docker login -u ayoubmahou -p $PASSWORD'
+    }
 
+    stage("Push Image to Docker Hub"){
+        sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
+    }
 
 }
 
