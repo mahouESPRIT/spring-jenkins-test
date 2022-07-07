@@ -20,14 +20,11 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-      stage('List pods') {
-         withKubeConfig([credentialsId: 'kube-cred']) {
-           sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-           sh 'chmod u+x ./kubectl'  
-           sh './kubectl get pods'
-           sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
-    }
-  }
+     stage('List pods') {
+       withKubeConfig([credentialsId: 'kube-cred']) {
+        sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
+         }
+      }
 
 }
 
