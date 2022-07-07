@@ -20,11 +20,13 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-     stage('Apply Kubernetes files') {
-        withKubeConfig([credentialsId: 'kube-cred', serverUrl: 'https://192.168.59.100:8443']) {
-          sh 'kubectl apply -f my-kubernetes-directory'
-       }
-       }
+    stage('Dump merged config') {
+      withKubeCredentials([
+        [credentialsId: 'kube-cred', serverUrl: 'https://192.168.59.100:8443'],
+       ]) {
+         sh 'kubectl config view'
+    }
+  }
   }
 
 
