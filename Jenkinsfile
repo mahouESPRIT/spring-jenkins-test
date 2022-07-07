@@ -20,14 +20,11 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-     stage('List pods') {
-        withKubeConfig([credentialsId: 'kube-cred']) {
-          sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-          sh 'chmod u+x ./kubectl'  
-          sh './kubectl get pods'
-      }
-     }
-}
+     stage('Apply Kubernetes files') {
+    withKubeConfig([credentialsId: 'kube-cred', serverUrl: 'https://192.168.59.100:8443']) {
+      sh 'kubectl apply -f my-kubernetes-directory'
+    }
+  }
 
 
 
