@@ -21,13 +21,9 @@ node {
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
     stage('Orchestrate')
-{
-    steps{
-        script{
-    sh 'kubectl apply -f k8s-spring-boot-deployment.yaml'
-        }
+    {
+    sh 'kubectl apply -f k8s-spring-boot-deployment.yaml'    
     }
-}
 
 }
 
