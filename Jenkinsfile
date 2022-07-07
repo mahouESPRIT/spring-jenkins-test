@@ -22,7 +22,7 @@ node {
     }
     stage('Orchestrate')
     {
-        sshCommand remote: remote, command: "kubectl apply -f k8s-spring-boot-deployment.yml"
+        sh "/usr/local/bin/kubectl apply -f k8s-spring-boot-deployment.yml"
     }
 
 }
