@@ -20,13 +20,22 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-    stage('List pods') {
-       withKubeConfig([credentialsId: 'kube-cred']) {
-        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-        sh 'chmod u+x ./kubectl'  
-        sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
-    }
-   }
+    stage("SSH Into k8s Server") {
+        def remote = [:]
+        remote.name = 'minikube'
+        remote.host = '100.0.0.2'
+        remote.user = 'vagrant'
+        remote.password = 'vagrant'
+        remote.allowAnyHosts = true
+} 
+    stage("SSH Into k8s Server") {
+        def remote = [:]
+        remote.name = 'minikube'
+        remote.host = '192.168.59.100'
+        remote.user = 'docker'
+        remote.password = 'tcuser'
+        remote.allowAnyHosts = true
+}
   }
 
 
