@@ -32,10 +32,11 @@ node {
         stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
                 sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
             } 
-        stage('Deploy spring boot') {
-          sshCommand remote: remote, command: "kubectl apply -f k8s-spring-boot-deployment.yml"
-        }
+       
 }
+     stage('Deploy spring boot') {
+          sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
+        }
   }
 
 
