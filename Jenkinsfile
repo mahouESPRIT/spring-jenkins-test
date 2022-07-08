@@ -34,9 +34,13 @@ node {
             } 
        
 }
-     stage('Deploy spring boot') {
-          sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
+     stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "kubernetes")
         }
+      }
+    }
   }
 
 
