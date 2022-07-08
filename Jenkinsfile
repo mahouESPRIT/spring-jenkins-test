@@ -20,14 +20,7 @@ node {
     stage("Push Image to Docker Hub"){
         sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     }
-    stage("SSH Into k8s Server") {
-        def remote = [:]
-        remote.name = 'minikube'
-        remote.host = '100.0.0.2'
-        remote.user = 'vagrant'
-        remote.password = 'vagrant'
-        remote.allowAnyHosts = true
-} 
+    
     stage("SSH Into k8s Server") {
         def remote = [:]
         remote.name = 'minikube'
