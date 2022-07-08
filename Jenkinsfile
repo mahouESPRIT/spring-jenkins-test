@@ -29,6 +29,9 @@ node {
         remote.password = 'tcuser'
         remote.allowAnyHosts = true
 }
+    stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
+            sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
+        } 
   }
 
 
