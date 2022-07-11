@@ -17,9 +17,9 @@ node {
         sh 'docker login -u ayoubmahou -p $PASSWORD'
     }
 
-    stage("Push Image to Docker Hub"){
-        sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
-    }
+    //stage("Push Image to Docker Hub"){
+       // sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
+    //}
     
     stage("SSH Into k8s Server") {
         def remote = [:]
