@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jhooq-springboot
+  namespace: jhooq-springboot
 spec:
   replicas: 3
   selector:
@@ -11,6 +12,7 @@ spec:
     metadata:
       labels:
         app: jhooq-springboot
+      namespace: jhooq-springboot
     spec:
       containers:
         - name: springboot
@@ -25,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jhooq-springboot
+  namespace: jhooq-springboot
 spec:
   type: NodePort
   ports:
