@@ -21,7 +21,7 @@ node {
        // sh 'docker push  ayoubmahou/jhooq-docker-demo:jhooq-docker-demo'
     //}
     
-    stage("SSH Into k8s Server") {
+    /*stage("SSH Into k8s Server") {
         def remote = [:]
         remote.name = 'minikube'
         remote.host = '192.168.59.100'
@@ -32,7 +32,7 @@ node {
         stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
                 sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
             } 
-}
+}*/
     stage('Deploying App to Kubernetes') {
         script {
           kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "kubernetes")
